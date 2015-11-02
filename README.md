@@ -1,10 +1,13 @@
 # Tietokantasovelluksen esittelysivu
 
-Yleisiä linkkejä:
 
-* [Linkki sovellukseeni](https://www.cs.helsinki.fi)
-* [Linkki dokumentaatiooni](https://www.github.com)
+## Muistilista
 
-## Työn aihe
+Tietokantasovellus harjoitustyö 2015, aiheena [muistilista](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Muistilista.html)
 
-Laita tähän aihekuvaus tai [linkki valmiiseen aiheeseen](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Pokemon-kanta.html) 
+
+## Yleisiä linkkejä:
+
+* [Linkki sovellukseeni](http://kauvo.users.cs.helsinki.fi/muistilista)
+* [Linkki dokumentaatiooni](https://github.com/SaraHeina/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
+
