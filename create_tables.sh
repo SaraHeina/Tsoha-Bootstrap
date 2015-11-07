@@ -4,8 +4,8 @@ source config/environment.sh
 
 echo "Luodaan tietokantataulut..."
 
-ssh $USERNAME@users.cs.helsinki.fi "
-cd htdocs/$PROJECT_FOLDER/sql
+ssh kauvo@users.cs.helsinki.fi "
+cd htdocs/muistilista/sql
 cat drop_tables.sql create_tables.sql | psql -1 -f -
 exit"
 
