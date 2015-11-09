@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{task.name}}</h1>
+<ul>
+    <li><strong>Nimi:</strong> {{task.name}}</li>
+    <li><strong>Suoritettu:</strong>{% if task.completed %}Kyllä{% else %}Ei{% endif %}</li>
+    <li><strong>Kategoriat:</strong> Koulu</li>
+    <li><strong>Kiireellisyys:</strong> {% if task.priority == 0 %}Ei kiire{% endif %}{% if task.priority == 1 %}Normaali{% endif %}{% if task.priority == 2 %}Kiire{% endif %}</li>
+    <li><strong>Deadline:</strong> {{task.deadline}}</li>
+</ul>
+<p>
+    {{ task.description }}
+</p>
+<p>
+    <a class="btn btn-primary" href="{{base_path}}/tasks/edit/{{ task.id }}">Muokkaa</a>
+    {% if not task.completed %}
+    <a href="{{base_path}}/tasks/complete/{{ task.id }}" class="btn btn-success">Suoritettu</a>
+    {% endif %}
+</p>
+{% endblock %}

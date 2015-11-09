@@ -23,3 +23,11 @@ $routes->get('/tehtava/1', function() {
 $routes->get('/tehtava', function() {
     HelloWorldController::tehtava_list();
 });
+
+$routes->get('/task', function() {
+    TaskController::tasks();
+});
+
+$routes->get('/task/:id', function($id) {
+    TaskController::show_task($id);
+});
