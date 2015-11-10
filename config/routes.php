@@ -28,6 +28,17 @@ $routes->get('/task', function() {
     TaskController::tasks();
 });
 
+$routes->post('/task', function(){
+  TaskController::store();
+});
+
+$routes->get('/task/new', function(){
+    TaskController::create();
+});
+
 $routes->get('/task/:id', function($id) {
     TaskController::show_task($id);
 });
+
+
+

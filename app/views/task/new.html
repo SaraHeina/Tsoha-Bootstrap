@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Uusi tehtävä</h1>
+
+<form method="post" action="{{base_path}}/task">
+    <div class="form-group">
+        <label>Nimi</label>
+        <input type="text" name="name" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>Kuvaus</label>
+        <textarea name="description" class="form-control"></textarea>
+    </div>
+    <div class="form-group radio">
+        <label>
+            <input type="radio" name="priority" value="0">
+            Ei kiire
+        </label>
+        <label>
+            <input type="radio" name="priority" value="1">
+            Normaali
+        </label>
+        <label>
+            <input type="radio" name="priority" value="2">
+            Kiire
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Deadline</label>
+        <input class="form-control" type="text" name="deadline">
+    </div>
+    <div class="form-group">
+        <label>Kategoriat</label>
+        <input type="text" class="form-control" name="Kategoria">
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Lisää</button>
+    </div>
+</form>
+{% endblock %}

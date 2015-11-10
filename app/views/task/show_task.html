@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>{{task.name}}</h1>
+<div class="alert alert-success">
+    <ul>
+        {{message}}
+    </ul>
+</div>
 <ul>
     <li><strong>Nimi:</strong> {{task.name}}</li>
     <li><strong>Suoritettu:</strong>{% if task.completed %}Kyllä{% else %}Ei{% endif %}</li>

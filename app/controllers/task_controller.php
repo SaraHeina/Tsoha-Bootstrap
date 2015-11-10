@@ -1,15 +1,34 @@
 <?php
 
 class TaskController extends BaseController {
-     public static function tasks(){
-         $tasks = Task::all();
-         View::make('task/tasks.html', array('tasks' => $tasks));
-     }
-     
-     public static function show_task($id){
-         $task = Task::find($id);
-         View::make('task/show_task.html', array('task' => $task));
-     }
+
+    public static function tasks() {
+        $tasks = Task::all();
+        View::make('task/tasks.html', array('tasks' => $tasks));
+    }
+
+    public static function show_task($id) {
+        $task = Task::find($id);
+        View::make('task/show_task.html', array('task' => $task));
+    }
+
+    public static function create() {
+        View::make('task/new.html');
+    }
+    
+    public static function store() {
+        $params = $_POST;
+        $task = new Task(Array(
+            'name' => $params['name'],
+            'description' => $params['description'],
+            'priority' => $params['priority'],
+            'deadline' => $params['deadline'],
+        ));
+        Kint::dump($params);
+        $task->save();
+        Redirect::to('/task/' . $task->id, array('message' => 'Tehtävä on lisätty :)'));
+    }
+
 }
 
 /* 

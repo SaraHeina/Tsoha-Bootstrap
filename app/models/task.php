@@ -48,6 +48,15 @@ class Task extends BaseModel {
         return $tasks;
     }
 
+    public function save() {
+        $query = DB::connection()->prepare('INSERT INTO Task (user_id, name, description, priority, deadline) VALUES (:user_id, :name, :description, :priority, :deadline) RETURNING id');
+        $query->execute(array('user_id' => 1, 'name' => $this->name, 'description' => $this->description, 'priority' => $this->priority, 'deadline' => $this->deadline));
+        $row = $query->fetch();
+        Kint::trace();
+        Kint::dump($row);
+        $this->id = $row['id'];        
+    }
+
 }
 
 /* 
