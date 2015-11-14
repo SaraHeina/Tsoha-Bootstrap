@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>{{task.name}}</h1>
+{% if message %}
 <div class="alert alert-success">
     <ul>
         {{message}}
     </ul>
 </div>
+{% endif %}
 <ul>
     <li><strong>Nimi:</strong> {{task.name}}</li>
     <li><strong>Suoritettu:</strong>{% if task.completed %}Kyllä{% else %}Ei{% endif %}</li>
