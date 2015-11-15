@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+{% import "macros/forms.html" as forms %}
 <h1>{{task.name}}</h1>
 {% if message %}
 <div class="alert alert-success">
@@ -19,7 +20,8 @@
     {{ task.description }}
 </p>
 <p>
-    <a class="btn btn-primary" href="{{base_path}}/tasks/edit/{{ task.id }}">Muokkaa</a>
+    {{forms.destroy_button("#{base_path}/task/#{task.id}/destroy")}}
+    <a class="btn btn-primary" href="{{base_path}}/task/{{ task.id }}/edit">Muokkaa</a>
     {% if not task.completed %}
     <a href="{{base_path}}/tasks/complete/{{ task.id }}" class="btn btn-success">Suoritettu</a>
     {% endif %}

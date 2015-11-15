@@ -33,8 +33,39 @@ class TaskController extends BaseController {
             View::make('task/new.html', array('errors' => $errors, 'attributes' => $attributes));
         }
         //Kint::dump($params);
-        //$task->save();
+        //$task->save();  
+    }
+    
+    public static function edit($id){
+        $task = Task::find($id);
+        View::make('task/edit.html', array('attributes' => $task));
+    }
+    
+    public static function update($id){
+        $params = $_POST;
         
+        $attributes = array(
+            'id' => $id,
+            'name' => $params['name'],
+            'description' => $params['description'],
+            'priority' => $params['priority'],
+            'deadline' => $params['deadline']
+        );
+        
+        $task = new Task($attributes);
+        $errors = $task->errors();
+        if(count($errors) > 0){
+            View::make('task/edit.html', array('errors' => $errors, 'attributes' => $attributes));
+        }else{
+            $task->update($id, $attributes);
+            Redirect::to('/task/' . $task->id, array('message' => 'Tehtävän muokaus onnistui!'));
+        }
+    }
+    
+    public static function destroy($id){
+        $task = new Task(array('id' => $id));
+        $task->destroy($id);
+        Redirect::to('/task', array('message' => 'Tehtävä on poistettu!'));
     }
 
 }

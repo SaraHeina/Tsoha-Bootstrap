@@ -2,7 +2,7 @@
 
 class User extends BaseModel {
 
-    public $id, $name, $password;
+    public $id, $username, $password;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
@@ -17,7 +17,7 @@ class User extends BaseModel {
         foreach ($rows as $row) {
             $users[] = new User(array(
                 'id' => $row['id'],
-                'name' => $row['name'],
+                'username' => $row['username'],
                 'password' => $row['password']
             ));
         }
@@ -32,7 +32,7 @@ class User extends BaseModel {
         if ($row) {
             $user = new User(array(
                 'id' => $row['id'],
-                'name' => $row['name'],
+                'username' => $row['username'],
                 'password' => $row['password']
             ));
 
