@@ -7,7 +7,7 @@ Tietokantasovellus harjoitustyö 2015, aiheena [muistilista](http://advancedkitt
 
 Sisään voi kirjautua tunnuksilla:
 
->>Käyttäjätunnus: Anna
+*Käyttäjätunnus:* Anna
 
 Salasana: sohvi
 
