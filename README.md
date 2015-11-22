@@ -11,7 +11,7 @@ Sisään voi kirjautua tunnuksilla:
 **Salasana:** sohvi
 
 **Käyttäjätunnus:** Mikael
-Salasana: miksu
+**Salasana:** miksu
 
 
 ## Yleisiä linkkejä:
