@@ -3,10 +3,11 @@
 
 ## Muistilista
 
-Tietokantasovellus harjoitustyö 2015, aiheena [muistilista](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Muistilista.html).
+Tietokantasovellus harjoitustyö 2015, aiheena [muistilista](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Muistilista.html)
+
 Sisään voi kirjautua tunnuksilla:
 
-Käyttäjätunnus: Anna
+>>Käyttäjätunnus: Anna
 
 Salasana: sohvi
 
