@@ -11,7 +11,7 @@
 {% endif %}
 <ul>
     <li><strong>Nimi:</strong> {{task.name}}</li>
-    <li><strong>Suoritettu:</strong>{% if task.completed %}Kyllä{% else %}Ei{% endif %}</li>
+    <li><strong>Suoritettu:</strong> {% if task.completed %}Kyllä{% else %}Ei{% endif %}</li>
     <li><strong>Kategoriat:</strong> Koulu</li>
     <li><strong>Kiireellisyys:</strong> {% if task.priority == 0 %}Ei kiire{% endif %}{% if task.priority == 1 %}Normaali{% endif %}{% if task.priority == 2 %}Kiire{% endif %}</li>
     <li><strong>Deadline:</strong> {{task.deadline}}</li>

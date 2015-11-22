@@ -30,9 +30,9 @@ class Task extends BaseModel {
         return null;
     }
 
-    public static function all() {
-        $query = DB::connection()->prepare('SELECT * FROM Task');
-        $query->execute();
+    public static function all($user_id) {
+        $query = DB::connection()->prepare('SELECT * FROM Task WHERE user_id = :user_id');
+        $query->execute(array('user_id' => $user_id));
         $rows = $query->fetchAll();
         $tasks = array();
 
@@ -52,7 +52,7 @@ class Task extends BaseModel {
 
     public function save() {
         $query = DB::connection()->prepare('INSERT INTO Task (user_id, name, description, priority, deadline) VALUES (:user_id, :name, :description, :priority, :deadline) RETURNING id');
-        $query->execute(array('user_id' => 1, 'name' => $this->name, 'description' => $this->description, 'priority' => $this->priority, 'deadline' => $this->deadline));
+        $query->execute(array('user_id' => $this->user_id, 'name' => $this->name, 'description' => $this->description, 'priority' => $this->priority, 'deadline' => $this->deadline));
         $row = $query->fetch();
         Kint::trace();
         Kint::dump($row);
@@ -61,6 +61,11 @@ class Task extends BaseModel {
 
     public static function destroy($id) {
         $query = DB::connection()->prepare('DELETE FROM Task WHERE id = :id');
+        $query->execute(array('id' => $id));
+    }
+
+    public static function complete($id) {
+        $query = DB::connection()->prepare('UPDATE Task SET completed = true WHERE id = :id');
         $query->execute(array('id' => $id));
     }
 

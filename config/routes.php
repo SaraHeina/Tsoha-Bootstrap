@@ -8,10 +8,6 @@ $routes->get('/hiekkalaatikko', function() {
     HelloWorldController::sandbox();
 });
 
-$routes->get('/login', function() {
-    HelloWorldController::login();
-});
-
 $routes->get('/tehtava/1/edit', function() {
     HelloWorldController::tehtava_edit();
 });
@@ -52,6 +48,10 @@ $routes->post('/task/:id/destroy', function($id) {
     TaskController::destroy($id);
 });
 
+$routes->get('/tasks/complete/:id', function($id) {
+    TaskController::complete($id);
+});
+
 $routes->get('/login', function() {
     UserController::login();
 });
@@ -60,5 +60,31 @@ $routes->post('/login', function() {
     UserController::handle_login();
 });
 
+$routes->post('/logout', function() {
+    UserController::logout();
+});
 
+$routes->get('/register', function() {
+    UserController::register();
+});
+
+$routes->post('/register', function() {
+    UserController::handle_registration();
+});
+
+$routes->get('/categories', function() {
+    CategoryController::categories();
+});
+
+$routes->get('/categories/:id/edit', function($id) {
+    CategoryController::edit_category($id);
+});
+
+$routes->post('/categories/:id/edit', function($id) {
+    CategoryController::update($id);
+});
+
+$routes->get('/categories/:id/destroy', function($id) {
+    CategoryController::destroy($id);
+});
 

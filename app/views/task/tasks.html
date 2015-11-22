@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Käyttäjän Anna muistilista</h1>
+<h1>Käyttäjän {{user_logged_in.name}} muistilista</h1>
 
 {% if message %}
 <div class="alert alert-success">
@@ -41,7 +41,11 @@
                         <label class="label label-danger">Kiire
                             {% endif %}
                             </td>
-                            <th><a class="btn btn-default btn-sm" href="{{base_path}}/task/{{ task.id }}/edit">Muokkaa</a> <a href="{{base_path}}/tasks/complete/{{ task.id }}" class="btn btn-success">Suoritettu</a></th>
+                            
+                            <th><a class="btn btn-default btn-sm" href="{{base_path}}/task/{{ task.id }}/edit">Muokkaa</a>
+                                {% if not task.completed %}
+                                <a href="{{base_path}}/task/complete/{{ task.id }}" class="btn btn-success">Suoritettu</a></th>
+                            {% endif %}
                             </tr>
                             {% endfor %}
                             </tbody>

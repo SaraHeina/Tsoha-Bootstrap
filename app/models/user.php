@@ -2,10 +2,20 @@
 
 class User extends BaseModel {
 
-    public $id, $username, $password;
+    public $id, $name, $password;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
+        $this->validators = array('validate_name', 'validate_password');
+    }
+
+    public function create() {
+        $query = DB::connection()->prepare('INSERT INTO Person (name, password) VALUES (:name, :password) RETURNING id');
+        $query->execute(array('name' => $this->name, 'password' => $this->password));
+        $row = $query->fetch();
+        Kint::trace();
+        Kint::dump($row);
+        $this->id = $row['id'];
     }
 
     public static function all() {
@@ -17,7 +27,7 @@ class User extends BaseModel {
         foreach ($rows as $row) {
             $users[] = new User(array(
                 'id' => $row['id'],
-                'username' => $row['username'],
+                'name' => $row['name'],
                 'password' => $row['password']
             ));
         }
@@ -32,13 +42,50 @@ class User extends BaseModel {
         if ($row) {
             $user = new User(array(
                 'id' => $row['id'],
-                'username' => $row['username'],
+                'name' => $row['name'],
                 'password' => $row['password']
             ));
 
             return $user;
         }
         return null;
+    }
+
+    public function validate_name() {
+        $errors = array();
+        if ($this->name == '' || $this->name == null) {
+            $errors[] = 'Käyttäjätunnus ei saa olla tyhjä!';
+        }
+        if (strlen($this->name) > 30) {
+            $errors[] = 'Käyttäjätunnuksen pituus saa olla enintään 30 merkkiä!';
+        }
+        return $errors;
+    }
+
+    public function validate_password() {
+        $errors = array();
+        if ($this->password == '' || $this->password == null) {
+            $errors[] = 'Salasana ei saa olla tyhjä!';
+        }
+        if (strlen($this->password) > 30) {
+            $errors[] = 'Salasana saa olla enintään 30 merkkiä pitkä!';
+        }
+        return $errors;
+    }
+
+    public static function authenticate($name, $password) {
+        $query = DB::connection()->prepare('SELECT * FROM Person WHERE name = :name AND password = :password LIMIT 1');
+        $query->execute(array('name' => $name, 'password' => $password));
+        $row = $query->fetch();
+        $user = new User(array(
+            'id' => $row['id'],
+            'name' => $row['name'],
+            'password' => $row['password']
+        ));
+        if ($user->password == $password) {
+            return $user;
+        }
+        return false;
     }
 
 }
