@@ -37,7 +37,7 @@ class CategoryController extends BaseController {
             $category->save();
             Redirect::to('/categories', array('message' => 'Kategoria on lisätty onnistuneesti!'));
         }else{
-            View::make('category/edit_category.html', array('errors' => $errors, 'category' => $category));
+            View::make('category/new_category.html', array('errors' => $errors, 'category' => $category));
         }
      }
 

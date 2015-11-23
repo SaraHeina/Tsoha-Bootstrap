@@ -39,15 +39,15 @@ class TaskController extends BaseController {
         );
         $task = new Task($attributes);
         $categories = Category::all($user_id);
-        if(isset($params['category'])){
+        if (isset($params['category'])) {
             $selected_categories = $params['category'];
-        }else{
+        } else {
             $selected_categories = null;
         }
         $errors = $task->errors();
         if (count($errors) == 0) {
             $task->save();
-            if(isset($params['category'])){
+            if (isset($params['category'])) {
                 Task::connect_categories($params['category'], $task->id);
             }
             Redirect::to('/task/' . $task->id, array('message' => 'Tehtävä on lisätty :)'));
@@ -59,7 +59,10 @@ class TaskController extends BaseController {
     public static function edit($id) {
         self::check_logged_in();
         $task = Task::find($id);
-        View::make('task/edit.html', array('attributes' => $task));
+        $user = self::get_user_logged_in();
+        $user_id = $user->id;
+        $categories = Category::all($user_id);
+        View::make('task/edit.html', array('attributes' => $task, 'all_categories' => $categories));
     }
 
     public static function complete($id) {
@@ -72,7 +75,14 @@ class TaskController extends BaseController {
     public static function update($id) {
         self::check_logged_in();
         $params = $_POST;
-
+        $user = self::get_user_logged_in();
+        $user_id = $user->id;
+        $categories = Category::all($user_id);
+        if(isset($params['category'])){
+            $selected_categories = $params['category'];
+        }else{
+            $selected_categories = null;
+        }
         $attributes = array(
             'id' => $id,
             'name' => $params['name'],
@@ -84,9 +94,13 @@ class TaskController extends BaseController {
         $task = new Task($attributes);
         $errors = $task->errors();
         if (count($errors) > 0) {
-            View::make('task/edit.html', array('errors' => $errors, 'attributes' => $attributes));
+            View::make('task/edit.html', array('errors' => $errors, 'attributes' => $attributes, 'all_categories' => $categories, 'selected_categories' => $selected_categories));
         } else {
-            $task->update($id, $attributes);
+            $task->update($task->id, $attributes);
+            Task::disconnect_categories($task->id);
+            if(isset($params['category'])){
+                Task::connect_categories($selected_categories, $id);
+            }
             Redirect::to('/task/' . $task->id, array('message' => 'Tehtävän muokaus onnistui!'));
         }
     }

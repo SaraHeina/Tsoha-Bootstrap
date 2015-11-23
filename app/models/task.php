@@ -60,6 +60,7 @@ class Task extends BaseModel {
     }
 
     public static function destroy($id) {
+        self::disconnect_categories($id);
         $query = DB::connection()->prepare('DELETE FROM Task WHERE id = :id');
         $query->execute(array('id' => $id));
     }

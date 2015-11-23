@@ -65,6 +65,9 @@ class Category extends BaseModel {
     }
     
     public static function destroy($id){
+        $query = DB::connection()->prepare('DELETE FROM TaskCategory WHERE category_id = :id');
+        $query->execute(array('id' => $id));
+        
         $query = DB::connection()->prepare('DELETE FROM Category WHERE id = :id');
         $query->execute(array('id' => $id));
     }
