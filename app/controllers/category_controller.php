@@ -15,6 +15,31 @@ class CategoryController extends BaseController {
         $category = Category::find($id);
         View::make('category/edit_category.html', array('category' => $category));
     }
+    
+     public static function create() {
+         self::check_logged_in();
+         View::make('category/new_category.html');
+     }
+     
+     public static function store() {
+         self::check_logged_in();
+        $params = $_POST;
+        $user = self::get_user_logged_in();
+        $user_id = $user->id;
+        $attributes = array(
+          'name' => $params['name'],
+          'description' => $params['description'],
+          'user_id' => $user->id
+        );
+        $category = new Category($attributes);
+        $errors = $category->errors();
+        if(count($errors) == 0){
+            $category->save();
+            Redirect::to('/categories', array('message' => 'Kategoria on lisätty onnistuneesti!'));
+        }else{
+            View::make('category/edit_category.html', array('errors' => $errors, 'category' => $category));
+        }
+     }
 
     public static function update($id) {
         self::check_logged_in();

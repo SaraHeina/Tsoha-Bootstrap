@@ -84,7 +84,15 @@ $routes->post('/categories/:id/edit', function($id) {
     CategoryController::update($id);
 });
 
-$routes->get('/categories/:id/destroy', function($id) {
+$routes->post('/categories/:id/destroy', function($id) {
     CategoryController::destroy($id);
+});
+
+$routes->post('/categories', function() {
+    CategoryController::store();
+});
+
+$routes->get('/categories/new', function() {
+    CategoryController::create();
 });
 

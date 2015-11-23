@@ -68,4 +68,13 @@ class Category extends BaseModel {
         $query = DB::connection()->prepare('DELETE FROM Category WHERE id = :id');
         $query->execute(array('id' => $id));
     }
+    
+    public function save() {
+        $query = DB::connection()->prepare('INSERT INTO Category (user_id, name, description) VALUES (:user_id, :name, :description) RETURNING id');
+        $query->execute(array('user_id' => $this->user_id, 'name' => $this->name, 'description' => $this->description));
+        $row = $query->fetch();
+        Kint::trace();
+        Kint::dump($row);
+        $this->id = $row['id'];
+    }
 }

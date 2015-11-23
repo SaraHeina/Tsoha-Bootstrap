@@ -29,7 +29,11 @@
         <tr>
             <td><a href="{{base_path}}/task/{{task.id}}">{{task.name}}</a></td>
             <td>{{task.deadline}}</td>
-            <td>koulu</td>
+            <td>
+                {% for category in task.categories %}
+                 <li>{{ category.name }}</li>
+                 {% endfor %}
+            </td>
             <td>
                 {% if task.priority == 0 %}
                 <label class="label label-default">Ei kiire

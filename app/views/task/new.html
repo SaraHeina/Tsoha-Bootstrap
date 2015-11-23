@@ -33,7 +33,12 @@
     </div>
     <div class="form-group">
         <label>Kategoriat</label>
-        <input type="text" class="form-control" name="Kategoria">
+        <select class="form-control" name="category[]" multiple="">
+            {% for category in all_categories %}
+            <option value="{{category.id}}" {% if category.id in selected_categories %} selected {% endif %}>{{category.name}}</option>
+            {% endfor %}
+        </select>
+        <p class="small">Pidä Ctrl (tai Macilla Cmd) pohjassa valitaksesi useampia kategorioita</p>
     </div>
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Lisää</button>

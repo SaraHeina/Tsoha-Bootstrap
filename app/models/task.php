@@ -118,6 +118,34 @@ class Task extends BaseModel {
         return $errors;
     }
 
+    public function categories() {
+        $categories = array();
+        $query = DB::connection()->prepare('SELECT * FROM Category WHERE id IN (SELECT category_id FROM TaskCategory WHERE task_id = :task_id )');
+        $query->execute(array('task_id' => $this->id));
+        $rows = $query->fetchAll();
+        foreach ($rows as $row) {
+            $categories[] = new Category(array(
+                'id' => $row['id'],
+                'user_id' => $row['user_id'],
+                'name' => $row['name'],
+                'description' => $row['description']
+            ));
+        }
+        return $categories;
+    }
+    
+    public static function connect_categories($category_ids, $task_id){
+        foreach($category_ids as $category_id){
+            $query = DB::connection()->prepare('INSERT INTO TaskCategory (category_id, task_id) VALUES (:category_id, :task_id)');
+            $query->execute(array('category_id' => $category_id, 'task_id' => $task_id));
+        }
+    }
+    
+    public static function disconnect_categories($task_id){
+        $query = DB::connection()->prepare('DELETE FROM TaskCategory WHERE task_id = :id');
+        $query->execute(array('id' => $task_id));
+    }
+
 }
 
 /* 
