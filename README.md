@@ -5,6 +5,14 @@
 
 Tietokantasovellus harjoitustyö 2015, aiheena [muistilista](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Muistilista.html)
 
+Sisään voi kirjautua tunnuksilla:
+
+**Käyttäjätunnus:** Anna
+**Salasana:** sohvi
+
+**Käyttäjätunnus:** Mikael
+**Salasana:** miksu
+
 
 ## Yleisiä linkkejä:
 
