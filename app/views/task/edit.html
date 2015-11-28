@@ -12,7 +12,7 @@
 {% endif %}
 <br/>
 <div class="form-group">
-    <form method="post" action="{{base_path}}/task/{{attributes.id}}/destroy" style="display: inline-block;">
+    <form method="post" action="{{base_path}}/task/{{attributes.id}}/destroy" style="display: inline-block;" class="destroy-form" data-confirm="Oletko varma, että haluat poistaa tehtävän?">
         <button type="submit" class="btn btn-danger">Poista tehtävä</button>
     </form>
     <button class="btn btn-success">On suoritettu</button>

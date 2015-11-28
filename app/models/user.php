@@ -59,7 +59,20 @@ class User extends BaseModel {
         if (strlen($this->name) > 30) {
             $errors[] = 'Käyttäjätunnuksen pituus saa olla enintään 30 merkkiä!';
         }
+        if(self::name_exists($this->name)){
+            $errors[] = 'Käyttäjätunnus on jo käytössä, valitse toinen!';
+        }
         return $errors;
+    }
+    
+    public static function name_exists($name){
+        $query = DB::connection()->prepare('SELECT * FROM Person WHERE name = :name LIMIT 1');
+        $query->execute(array('name' => $name));
+        $row = $query->fetch();
+        if(count($row) > 0){
+            return true;
+        }
+        return false;
     }
 
     public function validate_password() {

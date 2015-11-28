@@ -15,7 +15,7 @@
 
 <br/>
 <div class="form-group">
-    <form method="post" action="{{base_path}}/categories/{{ category.id }}/destroy" style="display: inline-block;">
+    <form method="post" action="{{base_path}}/categories/{{ category.id }}/destroy" style="display: inline-block;" class="destroy-form" data-confirm="Oletko varma, että haluat poistaa kategorian?">
         <button type="submit" class="btn btn-danger">Poista kategoria</button>
     </form>
 </div>
