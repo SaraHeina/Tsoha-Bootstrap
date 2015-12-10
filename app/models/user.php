@@ -68,7 +68,7 @@ class User extends BaseModel {
     public static function name_exists($name){
         $query = DB::connection()->prepare('SELECT * FROM Person WHERE name = :name LIMIT 1');
         $query->execute(array('name' => $name));
-        $row = $query->fetch();
+        $row = $query->fetchAll();
         if(count($row) > 0){
             return true;
         }

@@ -48,7 +48,7 @@
                             
                             <th><a class="btn btn-default btn-sm" href="{{base_path}}/task/{{ task.id }}/edit">Muokkaa</a>
                                 {% if not task.completed %}
-                                <a href="{{base_path}}/task/complete/{{ task.id }}" class="btn btn-success">Suoritettu</a></th>
+                                <a href="{{base_path}}/tasks/complete/{{ task.id }}" class="btn btn-success">Suoritettu</a></th>
                             {% endif %}
                             </tr>
                             {% endfor %}
